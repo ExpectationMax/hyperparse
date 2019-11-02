@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-"""Top-level package for HyperParse - Argparse for Hyperparameter Optimization."""
+"""Top-level package for HyperParse."""
 
 __author__ = """Max Horn"""
 __email__ = 'maexlich@gmail.com'

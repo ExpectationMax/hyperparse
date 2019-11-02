@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """Tests for `hyperparse` package."""
 
 import pytest
-
 
 from hyperparse import hyperparse
 
