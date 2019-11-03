@@ -26,7 +26,12 @@ COVERAGE_REPORT = COVERAGE_DIR.joinpath("index.html")
 DOCS_DIR = ROOT_DIR.joinpath("docs")
 DOCS_BUILD_DIR = DOCS_DIR.joinpath("_build")
 DOCS_INDEX = DOCS_BUILD_DIR.joinpath("index.html")
-PYTHON_DIRS = [str(d) for d in [SOURCE_DIR, TEST_DIR]]
+# Use relative paths due to issues with travis (travis username contains
+# `build` which matches to gitignore and is thus ignored by black)
+PYTHON_DIRS = [
+    str(d.relative_to(Path(os.curdir).resolve()))
+    for d in [SOURCE_DIR, TEST_DIR, SETUP_FILE, ROOT_DIR.joinpath("tasks.py")]
+]
 
 
 def _delete_file(file):
