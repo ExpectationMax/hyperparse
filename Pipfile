@@ -11,11 +11,11 @@ wheel = "*"
 sphinx = "*"
 twine = "*"
 tox = "*"
-"flake8" = "*"
-pylint = "*"
 pytest = "*"
-isort = "*"
-black = "*"
 
 [packages]
 hyperparse = {path = ".", editable = true}
+
+[scripts]
+install_formatting_packages = "pip3 install black isort"
+install_linting_packages = "pip3 install pylint flake8"
