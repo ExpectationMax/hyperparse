@@ -48,8 +48,12 @@ def format(c, check=False):
     python_dirs_string = " ".join(PYTHON_DIRS)
     # Run yapf
     black_options = '{}'.format('--diff --check' if check else '')
-    c.run("black {} --target-version py35 {}"
-          .format(black_options, python_dirs_string))
+    black_command = (
+        "black {} --target-version py35 --verbose {}"
+        .format(black_options, python_dirs_string)
+    )
+    print(black_command)
+    c.run(black_command)
     # Run isort
     isort_options = '--recursive {}'.format(
         '--check-only' if check else '')
