@@ -2,9 +2,9 @@
 
 language: python
 python:
-  - 3.7
-  - 3.6
-  - 3.5
+  - "3.7"
+  - "3.6"
+  - "3.5"
 
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install -U tox-travis
@@ -14,10 +14,10 @@ script: tox
 jobs:
   include:
     - name: "Formatting test"
-      python: 3.6
+      python: "3.6"
       script: tox -e format
     - name: "Linting test"
-      python: 3.6
+      python: "3.6"
       script: tox -e lint
 
 # Assuming you have installed the travis-ci CLI tool, after you
