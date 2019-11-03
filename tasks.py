@@ -3,16 +3,19 @@ Tasks for maintaining the project.
 
 Execute 'invoke --list' for guidance on using Invoke
 """
-import shutil
+import os
 import platform
+import shutil
+import webbrowser
 
 from invoke import task
+
 try:
     from pathlib import Path
+
     Path().expanduser()
 except (ImportError, AttributeError):
     from pathlib2 import Path
-import webbrowser
 
 
 ROOT_DIR = Path(__file__).parent
@@ -45,23 +48,21 @@ def _delete_file(file):
             pass
 
 
-@task(help={'check': "Checks if source is formatted without applying changes"})
+@task(help={"check": "Checks if source is formatted without applying changes"})
 def format(c, check=False):
     """
     Format code
     """
     python_dirs_string = " ".join(PYTHON_DIRS)
-    # Run yapf
-    black_options = '{}'.format('--diff --check' if check else '')
-    black_command = (
-        "black {} --target-version py35 --verbose {}"
-        .format(black_options, python_dirs_string)
+    # Run black
+    black_options = "{}".format("--diff --check" if check else "")
+    black_command = "black {} --target-version py35 --verbose {}".format(
+        black_options, python_dirs_string
     )
     print(black_command)
     c.run(black_command)
     # Run isort
-    isort_options = '--recursive {}'.format(
-        '--check-only' if check else '')
+    isort_options = "--recursive {}".format("--check-only" if check else "")
     c.run("isort {} {}".format(isort_options, python_dirs_string))
 
 
@@ -79,11 +80,11 @@ def test(c):
     """
     Run tests
     """
-    pty = platform.system() == 'Linux'
+    pty = platform.system() == "Linux"
     c.run("python {} test".format(SETUP_FILE), pty=pty)
 
 
-@task(help={'publish': "Publish the result via coveralls"})
+@task(help={"publish": "Publish the result via coveralls"})
 def coverage(c, publish=False):
     """
     Create coverage report
